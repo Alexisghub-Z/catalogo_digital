@@ -32,7 +32,6 @@ function Cart({ cartItems, onUpdateQuantity, onRemoveItem, onClose }) {
                 {cartItems.map((item) => (
                   <div key={item.id} className="cart-item">
                     <div className="cart-item-info">
-                      <span className="cart-item-icon">{item.image}</span>
                       <div className="cart-item-details">
                         <h4>{item.name}</h4>
                         <p className="cart-item-price">

@@ -124,10 +124,6 @@
   align-items: flex-start;
 }
 
-.cart-item-icon {
-  font-size: 2.5em;
-}
-
 .cart-item-details {
   flex: 1;
 }
