@@ -1,0 +1,275 @@
+.admin-controls {
+  background: #f0f8ff;
+  border: 2px dashed var(--primary-color);
+  border-radius: 10px;
+  padding: 15px;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.admin-availability {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.3s;
+  border-radius: 26px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+input:checked + .toggle-slider {
+  background-color: #4caf50;
+}
+
+input:checked + .toggle-slider:before {
+  transform: translateX(24px);
+}
+
+input:disabled + .toggle-slider {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.availability-status {
+  font-weight: 600;
+  font-size: 0.95em;
+}
+
+.availability-status.available {
+  color: #2e7d32;
+}
+
+.availability-status.unavailable {
+  color: #c62828;
+}
+
+.admin-price-edit {
+  display: flex;
+  align-items: center;
+}
+
+.price-edit-button {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 8px;
+  font-size: 0.9em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.price-edit-button:hover {
+  background: var(--secondary-color);
+}
+
+.price-edit-form {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+}
+
+.price-input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 2px solid var(--primary-color);
+  border-radius: 8px;
+  font-size: 1em;
+  font-weight: 600;
+}
+
+.price-input:focus {
+  outline: none;
+  border-color: var(--secondary-color);
+}
+
+.price-save-button,
+.price-cancel-button {
+  width: 35px;
+  height: 35px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.price-save-button {
+  background: #4caf50;
+  color: white;
+}
+
+.price-save-button:hover:not(:disabled) {
+  transform: scale(1.1);
+  background: #45a049;
+}
+
+.price-cancel-button {
+  background: #f44336;
+  color: white;
+}
+
+.price-cancel-button:hover:not(:disabled) {
+  transform: scale(1.1);
+  background: #da190b;
+}
+
+.price-save-button:disabled,
+.price-cancel-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.admin-edit {
+  display: flex;
+  align-items: center;
+}
+
+.edit-product-button {
+  background: #2196f3;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 8px;
+  font-size: 0.9em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  width: 100%;
+}
+
+.edit-product-button:hover:not(:disabled) {
+  background: #1976d2;
+}
+
+.edit-product-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.admin-delete {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.delete-button {
+  background: #f44336;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 8px;
+  font-size: 0.9em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  width: fit-content;
+}
+
+.delete-button:hover:not(:disabled) {
+  background: #d32f2f;
+  transform: scale(1.02);
+}
+
+.delete-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.delete-confirm {
+  background: #fff3e0;
+  border: 2px solid #ff9800;
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.delete-warning {
+  color: #e65100;
+  font-weight: 700;
+  font-size: 0.95em;
+  margin: 0;
+  text-align: center;
+}
+
+.delete-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.confirm-delete-button,
+.cancel-delete-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.confirm-delete-button {
+  background: #d32f2f;
+  color: white;
+}
+
+.confirm-delete-button:hover:not(:disabled) {
+  background: #b71c1c;
+  transform: scale(1.05);
+}
+
+.cancel-delete-button {
+  background: #757575;
+  color: white;
+}
+
+.cancel-delete-button:hover:not(:disabled) {
+  background: #616161;
+  transform: scale(1.05);
+}
+
+.confirm-delete-button:disabled,
+.cancel-delete-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

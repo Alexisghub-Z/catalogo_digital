@@ -1,0 +1,175 @@
+.app {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+.header {
+  padding: 40px 35px;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  border-radius: 20px;
+  margin-bottom: 40px;
+  box-shadow: 0 8px 25px rgba(139, 69, 19, 0.15);
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.header-content > div:first-child {
+  text-align: left;
+  flex: 1;
+}
+
+.header h1 {
+  font-size: 2.8em;
+  margin: 0 0 12px 0;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header p {
+  font-size: 1.25em;
+  opacity: 0.95;
+  margin: 0;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+}
+
+.admin-button {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid white;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.admin-button:hover {
+  background: white;
+  color: var(--primary-color);
+}
+
+.admin-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.admin-badge {
+  background: rgba(255, 255, 255, 0.3);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9em;
+}
+
+.logout-button {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.logout-button:hover {
+  background: white;
+  color: var(--primary-color);
+}
+
+.firebase-warning {
+  background: #fff3cd;
+  border: 2px solid #ffc107;
+  color: #856404;
+  padding: 15px 20px;
+  border-radius: 10px;
+  margin: -10px 0 20px 0;
+  text-align: center;
+  font-weight: 600;
+}
+
+.footer {
+  text-align: center;
+  padding: 50px 30px;
+  margin-top: 60px;
+  background: linear-gradient(135deg, #faf7f2 0%, #f5f0e8 100%);
+  border-radius: 20px;
+  border: 1px solid #f0e9dc;
+}
+
+.footer p {
+  margin: 12px 0;
+  color: var(--primary-color);
+  font-size: 1.15em;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.footer-note {
+  font-size: 0.95em;
+  color: #888;
+  font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .app {
+    padding: 10px;
+  }
+
+  .header {
+    padding: 20px 15px;
+    margin-bottom: 20px;
+  }
+
+  .header-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .header-content > div:first-child {
+    text-align: center;
+  }
+
+  .header h1 {
+    font-size: 1.8em;
+  }
+
+  .header p {
+    font-size: 1em;
+  }
+
+  .admin-button,
+  .logout-button {
+    font-size: 0.9em;
+    padding: 8px 16px;
+  }
+
+  .firebase-warning {
+    font-size: 0.9em;
+    padding: 12px 15px;
+  }
+
+  .footer {
+    padding: 30px 15px;
+    margin-top: 30px;
+  }
+}
