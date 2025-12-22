@@ -5,6 +5,7 @@ import CartButton from './components/CartButton';
 import LoginModal from './components/LoginModal';
 import AddProductModal from './components/AddProductModal';
 import EditProductModal from './components/EditProductModal';
+import Toast from './components/Toast';
 import { onAuthChange, logoutAdmin } from './services/authService';
 import { subscribeToProducts } from './services/productsService';
 import './App.css';
@@ -19,6 +20,9 @@ function App() {
   const [user, setUser] = useState(null);
   const [products, setProducts] = useState([]);
   const [isFirebaseConfigured, setIsFirebaseConfigured] = useState(true);
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
+  const [cartPulse, setCartPulse] = useState(false);
 
   // Escuchar cambios en autenticación
   useEffect(() => {
@@ -62,6 +66,14 @@ function App() {
         return [...prevItems, { ...product, quantity: 1 }];
       }
     });
+
+    // Mostrar notificación
+    setToastMessage(`${product.name} agregado al carrito`);
+    setShowToast(true);
+
+    // Animar botón del carrito
+    setCartPulse(true);
+    setTimeout(() => setCartPulse(false), 600);
   };
 
   const handleUpdateQuantity = (productId, newQuantity) => {
@@ -152,6 +164,7 @@ function App() {
         <CartButton
           itemCount={getTotalItems()}
           onClick={() => setIsCartOpen(true)}
+          pulse={cartPulse}
         />
       )}
 
@@ -192,6 +205,13 @@ function App() {
             // El producto se editó exitosamente
             // Firebase actualizará automáticamente la lista
           }}
+        />
+      )}
+
+      {showToast && (
+        <Toast
+          message={toastMessage}
+          onClose={() => setShowToast(false)}
         />
       )}
     </div>
