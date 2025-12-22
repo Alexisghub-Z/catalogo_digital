@@ -7,7 +7,6 @@ import AddProductModal from './components/AddProductModal';
 import EditProductModal from './components/EditProductModal';
 import { onAuthChange, logoutAdmin } from './services/authService';
 import { subscribeToProducts } from './services/productsService';
-import { products as localProducts } from './data/products';
 import './App.css';
 
 function App() {
@@ -18,7 +17,7 @@ function App() {
   const [isEditProductOpen, setIsEditProductOpen] = useState(false);
   const [productToEdit, setProductToEdit] = useState(null);
   const [user, setUser] = useState(null);
-  const [products, setProducts] = useState(localProducts);
+  const [products, setProducts] = useState([]);
   const [isFirebaseConfigured, setIsFirebaseConfigured] = useState(true);
 
   // Escuchar cambios en autenticación
@@ -29,7 +28,7 @@ function App() {
       });
       return () => unsubscribe();
     } catch (error) {
-      console.warn('Firebase no configurado. Usando productos locales.');
+      console.error('Firebase no configurado:', error);
       setIsFirebaseConfigured(false);
     }
   }, []);
@@ -40,13 +39,11 @@ function App() {
 
     try {
       const unsubscribe = subscribeToProducts((firebaseProducts) => {
-        if (firebaseProducts.length > 0) {
-          setProducts(firebaseProducts);
-        }
+        setProducts(firebaseProducts);
       });
       return () => unsubscribe();
     } catch (error) {
-      console.warn('Error al conectar con Firebase. Usando productos locales.');
+      console.error('Error al conectar con Firebase:', error);
       setIsFirebaseConfigured(false);
     }
   }, [isFirebaseConfigured]);
@@ -131,8 +128,8 @@ function App() {
 
       {!isFirebaseConfigured && (
         <div className="firebase-warning">
-          ⚠️ Firebase no configurado. Revisa FIREBASE_SETUP.md para instrucciones.
-          Usando datos de prueba locales.
+          ❌ Error: No se pudieron cargar los productos. Firebase no está configurado correctamente.
+          Por favor, revisa FIREBASE_SETUP.md para instrucciones.
         </div>
       )}
 
