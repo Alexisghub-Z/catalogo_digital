@@ -8,6 +8,7 @@ import EditProductModal from './components/EditProductModal';
 import Toast from './components/Toast';
 import { onAuthChange, logoutAdmin } from './services/authService';
 import { subscribeToProducts } from './services/productsService';
+import { isUserAdmin } from './services/adminService';
 import './App.css';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
   const [isEditProductOpen, setIsEditProductOpen] = useState(false);
   const [productToEdit, setProductToEdit] = useState(null);
   const [user, setUser] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [products, setProducts] = useState([]);
   const [isFirebaseConfigured, setIsFirebaseConfigured] = useState(true);
   const [showToast, setShowToast] = useState(false);
@@ -27,8 +29,20 @@ function App() {
   // Escuchar cambios en autenticación
   useEffect(() => {
     try {
-      const unsubscribe = onAuthChange((currentUser) => {
+      const unsubscribe = onAuthChange(async (currentUser) => {
         setUser(currentUser);
+
+        // Verificar si el usuario es admin
+        if (currentUser) {
+          const adminStatus = await isUserAdmin(currentUser.email);
+          setIsAdmin(adminStatus);
+
+          if (!adminStatus) {
+            console.warn('Usuario no autorizado como administrador');
+          }
+        } else {
+          setIsAdmin(false);
+        }
       });
       return () => unsubscribe();
     } catch (error) {
@@ -104,14 +118,13 @@ function App() {
   const handleLogout = async () => {
     await logoutAdmin();
     setUser(null);
+    setIsAdmin(false);
   };
 
   const handleEditProduct = (product) => {
     setProductToEdit(product);
     setIsEditProductOpen(true);
   };
-
-  const isAdmin = user !== null;
 
   return (
     <div className="app">

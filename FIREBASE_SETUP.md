@@ -105,17 +105,57 @@ const firebaseConfig = {
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Permitir lectura a todos (para que los clientes vean el catálogo)
+
+    // Función para verificar si un usuario es admin
+    function isAdmin() {
+      return request.auth != null &&
+             exists(/databases/$(database)/documents/admin_users/$(request.auth.token.email));
+    }
+
+    // Productos: Todos pueden leer, solo admins pueden escribir
     match /products/{product} {
       allow read: if true;
-      // Solo usuarios autenticados pueden escribir
-      allow write: if request.auth != null;
+      allow write: if isAdmin();
+    }
+
+    // Lista de admins: Solo admins pueden leer/modificar
+    match /admin_users/{email} {
+      allow read: if request.auth != null;
+      allow write: if isAdmin();
     }
   }
 }
 ```
 
 9. Haz clic en **"Publicar"**
+
+---
+
+## 🔒 Paso 5.5: Configurar Administradores (IMPORTANTE)
+
+**CRÍTICO:** Debes configurar quién puede ser administrador.
+
+1. En Firestore Database, haz clic en **"Iniciar colección"** (o **"+ Agregar colección"**)
+2. ID de colección: `admin_users`
+3. Haz clic en **"Siguiente"**
+4. Para el primer documento:
+   - **ID de documento:** Tu email completo (ejemplo: `admin@tupanaderia.com`)
+   - Agrega estos campos:
+
+   | Campo | Tipo | Valor |
+   |-------|------|-------|
+   | isAdmin | boolean | true |
+   | email | string | admin@tupanaderia.com |
+   | createdAt | timestamp | (fecha actual) |
+
+5. Haz clic en **"Guardar"**
+
+**⚠️ IMPORTANTE:**
+- El ID del documento debe ser exactamente tu email (el mismo que usas para login)
+- Todo en minúsculas
+- Sin este paso, NO podrás acceder como admin
+
+**Para más detalles sobre seguridad, revisa:** `SEGURIDAD_ADMIN.md`
 
 ---
 
