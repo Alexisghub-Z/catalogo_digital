@@ -3,15 +3,15 @@ import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 
-// Configuración de Firebase
+// Configuración de Firebase usando variables de entorno
 const firebaseConfig = {
-  apiKey: "AIzaSyAedlTSSSn1wo655520H-_mmpJLoYuK-Vc",
-  authDomain: "catalogo-panaderia-addd7.firebaseapp.com",
-  projectId: "catalogo-panaderia-addd7",
-  storageBucket: "catalogo-panaderia-addd7.firebasestorage.app",
-  messagingSenderId: "920728414780",
-  appId: "1:920728414780:web:94c52670f31001df627139",
-  measurementId: "G-501HB9Y7CM"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 // Inicializar Firebase

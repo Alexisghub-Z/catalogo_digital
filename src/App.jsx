@@ -8,7 +8,6 @@ import EditProductModal from './components/EditProductModal';
 import Toast from './components/Toast';
 import { onAuthChange, logoutAdmin } from './services/authService';
 import { subscribeToProducts } from './services/productsService';
-import { isUserAdmin } from './services/adminService';
 import './App.css';
 
 function App() {
@@ -29,20 +28,10 @@ function App() {
   // Escuchar cambios en autenticación
   useEffect(() => {
     try {
-      const unsubscribe = onAuthChange(async (currentUser) => {
+      const unsubscribe = onAuthChange((currentUser) => {
         setUser(currentUser);
-
-        // Verificar si el usuario es admin
-        if (currentUser) {
-          const adminStatus = await isUserAdmin(currentUser.email);
-          setIsAdmin(adminStatus);
-
-          if (!adminStatus) {
-            console.warn('Usuario no autorizado como administrador');
-          }
-        } else {
-          setIsAdmin(false);
-        }
+        // Cualquier usuario autenticado es admin
+        setIsAdmin(currentUser !== null);
       });
       return () => unsubscribe();
     } catch (error) {
