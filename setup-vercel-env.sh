@@ -6,11 +6,13 @@
 echo "🚀 Configurando variables de entorno en Vercel..."
 echo ""
 
-# Verificar que Vercel CLI esté instalado
-if ! command -v vercel &> /dev/null; then
-    echo "❌ Vercel CLI no está instalado."
-    echo "Instalando Vercel CLI..."
-    npm install -g vercel
+# Usar Vercel CLI local (npx vercel)
+VERCEL_CMD="npx vercel"
+
+# Verificar que node_modules exista
+if [ ! -d "node_modules" ]; then
+    echo "❌ node_modules no encontrado. Ejecutando npm install..."
+    npm install
 fi
 
 # Leer el archivo .env
@@ -54,14 +56,16 @@ while IFS='=' read -r key value; do
         value=$(echo "$value" | xargs)
 
         echo "📝 Configurando: $key"
-        vercel env add "$key" production <<< "$value" > /dev/null 2>&1
-        vercel env add "$key" preview <<< "$value" > /dev/null 2>&1
-        vercel env add "$key" development <<< "$value" > /dev/null 2>&1
+        $VERCEL_CMD env add "$key" production <<< "$value" > /dev/null 2>&1
+        $VERCEL_CMD env add "$key" preview <<< "$value" > /dev/null 2>&1
+        $VERCEL_CMD env add "$key" development <<< "$value" > /dev/null 2>&1
     fi
 done < .env
 
 echo ""
 echo "✅ Variables configuradas exitosamente!"
 echo ""
-echo "🔄 Ahora ejecuta: vercel --prod"
+echo "🔄 Ahora ejecuta: npx vercel --prod"
 echo "   Para re-desplegar tu aplicación con las nuevas variables"
+echo ""
+echo "O usa: npm run vercel:deploy"

@@ -2,19 +2,15 @@
 
 ## Método Rápido con Script (Recomendado)
 
-### Paso 1: Instalar Vercel CLI
+### Paso 1: Login en Vercel
+
+Vercel CLI ya está instalado en el proyecto como dependencia.
 
 ```bash
-npm install -g vercel
+npm run vercel:login
 ```
 
-### Paso 2: Login en Vercel
-
-```bash
-vercel login
-```
-
-### Paso 3: Configurar Variables de Entorno Automáticamente
+### Paso 2: Configurar Variables de Entorno Automáticamente
 
 ```bash
 npm run vercel:env
@@ -25,7 +21,7 @@ Este script:
 - ✅ Configura todas las variables en Vercel automáticamente
 - ✅ Las aplica a Production, Preview y Development
 
-### Paso 4: Desplegar
+### Paso 3: Desplegar
 
 ```bash
 npm run vercel:deploy
@@ -78,8 +74,12 @@ Después del despliegue:
 
 ### Error: "vercel: command not found"
 
+Usa `npx` o los scripts de npm:
+
 ```bash
-npm install -g vercel
+npm run vercel:login
+npm run vercel:env
+npm run vercel:deploy
 ```
 
 ### Las variables no se aplican
